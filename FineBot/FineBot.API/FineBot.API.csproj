@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3FE26CFD-6E3F-41BE-9844-62A05F660E94}</ProjectGuid>
+    <ProjectGuid>{1EDF3522-E2AE-4569-B98B-0FC3B350B523}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FineBot</RootNamespace>
-    <AssemblyName>FineBot</AssemblyName>
+    <RootNamespace>FineBot.API</RootNamespace>
+    <AssemblyName>FineBot.API</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,10 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Bazam, Version=2.6.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Bazam.2.6.2.0\lib\net45\Bazam.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\packages\Castle.Core.3.3.0\lib\net45\Castle.Core.dll</HintPath>
       <Private>True</Private>
@@ -42,13 +38,8 @@
       <HintPath>..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -56,27 +47,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstracts\EntityBase.cs" />
-    <Compile Include="Abstracts\GuidIdentifiedEntity.cs" />
-    <Compile Include="Abstracts\Specification.cs" />
+    <Compile Include="DI\APIInstaller.cs" />
     <Compile Include="DI\Bootstrapper.cs" />
-    <Compile Include="DI\Installers\DomainInstaller.cs" />
-    <Compile Include="Entities\Fine.cs" />
-    <Compile Include="Entities\User.cs" />
-    <Compile Include="Enums\Severity.cs" />
-    <Compile Include="ExtensionMethods\EnumExtensions.cs" />
-    <Compile Include="ExtensionMethods\ExpressionExtensions.cs" />
-    <Compile Include="Infrastructure\Guard.cs" />
-    <Compile Include="Infrastructure\ParameterRebinder.cs" />
-    <Compile Include="Infrastructure\ValidationMessage.cs" />
-    <Compile Include="Infrastructure\ValidationResult.cs" />
-    <Compile Include="Interfaces\IEntity.cs" />
-    <Compile Include="Interfaces\IRepository.cs" />
-    <Compile Include="Interfaces\ISpecification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FineBot.DataAccess\FineBot.DataAccess.csproj">
+      <Project>{82c10b76-c015-41da-b5ae-d32d4a42fc9c}</Project>
+      <Name>FineBot.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FineBot\FineBot.Domain.csproj">
+      <Project>{3fe26cfd-6e3f-41be-9844-62a05f660e94}</Project>
+      <Name>FineBot.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

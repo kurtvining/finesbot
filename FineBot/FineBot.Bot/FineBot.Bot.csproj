@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3FE26CFD-6E3F-41BE-9844-62A05F660E94}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{5C6BF34C-18F7-45D5-8624-45B1A43CD7FF}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FineBot</RootNamespace>
-    <AssemblyName>FineBot</AssemblyName>
+    <RootNamespace>FineBot.Bot</RootNamespace>
+    <AssemblyName>FineBot.Bot</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -29,6 +29,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Bazam, Version=2.6.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Bazam.2.6.2.0\lib\net45\Bazam.dll</HintPath>
@@ -42,41 +45,47 @@
       <HintPath>..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="MargieBot, Version=1.1.4.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MargieBot.1.1.4.1\lib\net45\MargieBot.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="websocket-sharp, Version=1.0.2.19104, Culture=neutral, PublicKeyToken=5660b08a1845a91e, processorArchitecture=MSIL">
+      <HintPath>..\packages\MargieBot.1.1.4.1\lib\net45\websocket-sharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstracts\EntityBase.cs" />
-    <Compile Include="Abstracts\GuidIdentifiedEntity.cs" />
-    <Compile Include="Abstracts\Specification.cs" />
-    <Compile Include="DI\Bootstrapper.cs" />
-    <Compile Include="DI\Installers\DomainInstaller.cs" />
-    <Compile Include="Entities\Fine.cs" />
-    <Compile Include="Entities\User.cs" />
-    <Compile Include="Enums\Severity.cs" />
-    <Compile Include="ExtensionMethods\EnumExtensions.cs" />
-    <Compile Include="ExtensionMethods\ExpressionExtensions.cs" />
-    <Compile Include="Infrastructure\Guard.cs" />
-    <Compile Include="Infrastructure\ParameterRebinder.cs" />
-    <Compile Include="Infrastructure\ValidationMessage.cs" />
-    <Compile Include="Infrastructure\ValidationResult.cs" />
-    <Compile Include="Interfaces\IEntity.cs" />
-    <Compile Include="Interfaces\IRepository.cs" />
-    <Compile Include="Interfaces\ISpecification.cs" />
+    <Compile Include="DI\BotInstaller.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FineBot.API\FineBot.API.csproj">
+      <Project>{1edf3522-e2ae-4569-b98b-0fc3b350b523}</Project>
+      <Name>FineBot.API</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FineBot\FineBot.Domain.csproj">
+      <Project>{3fe26cfd-6e3f-41be-9844-62a05f660e94}</Project>
+      <Name>FineBot.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Responders\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
